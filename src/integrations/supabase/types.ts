@@ -14,10 +14,262 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      clientes: {
+        Row: {
+          categoria_cliente: string
+          cpf: string
+          created_at: string | null
+          email: string | null
+          id: string
+          nome: string
+          telefone: string
+          updated_at: string | null
+        }
+        Insert: {
+          categoria_cliente: string
+          cpf: string
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          nome: string
+          telefone: string
+          updated_at?: string | null
+        }
+        Update: {
+          categoria_cliente?: string
+          cpf?: string
+          created_at?: string | null
+          email?: string | null
+          id?: string
+          nome?: string
+          telefone?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      emprestimos: {
+        Row: {
+          cliente_id: string
+          created_at: string | null
+          data_devolucao_prevista: string
+          data_devolucao_real: string | null
+          data_emprestimo: string | null
+          equipamento_id: string
+          id: string
+          observacoes: string | null
+          seguranca_id: string
+          status: string
+          tempo_uso_estimado: number
+          termo_aceito: boolean | null
+          updated_at: string | null
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string | null
+          data_devolucao_prevista: string
+          data_devolucao_real?: string | null
+          data_emprestimo?: string | null
+          equipamento_id: string
+          id?: string
+          observacoes?: string | null
+          seguranca_id: string
+          status?: string
+          tempo_uso_estimado: number
+          termo_aceito?: boolean | null
+          updated_at?: string | null
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string | null
+          data_devolucao_prevista?: string
+          data_devolucao_real?: string | null
+          data_emprestimo?: string | null
+          equipamento_id?: string
+          id?: string
+          observacoes?: string | null
+          seguranca_id?: string
+          status?: string
+          tempo_uso_estimado?: number
+          termo_aceito?: boolean | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "emprestimos_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "emprestimos_equipamento_id_fkey"
+            columns: ["equipamento_id"]
+            isOneToOne: false
+            referencedRelation: "equipamentos"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "emprestimos_seguranca_id_fkey"
+            columns: ["seguranca_id"]
+            isOneToOne: false
+            referencedRelation: "segurancas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      equipamentos: {
+        Row: {
+          codigo: string
+          created_at: string | null
+          id: string
+          localizacao: string
+          observacoes: string | null
+          status: string
+          tipo_equipamento: string
+          updated_at: string | null
+        }
+        Insert: {
+          codigo: string
+          created_at?: string | null
+          id?: string
+          localizacao: string
+          observacoes?: string | null
+          status?: string
+          tipo_equipamento: string
+          updated_at?: string | null
+        }
+        Update: {
+          codigo?: string
+          created_at?: string | null
+          id?: string
+          localizacao?: string
+          observacoes?: string | null
+          status?: string
+          tipo_equipamento?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      fila_espera: {
+        Row: {
+          cliente_id: string
+          created_at: string | null
+          data_entrada_fila: string | null
+          expires_at: string | null
+          id: string
+          notificado_em: string | null
+          posicao: number
+          status: string
+          tempo_uso_estimado: number
+          tipo_equipamento_solicitado: string
+          updated_at: string | null
+        }
+        Insert: {
+          cliente_id: string
+          created_at?: string | null
+          data_entrada_fila?: string | null
+          expires_at?: string | null
+          id?: string
+          notificado_em?: string | null
+          posicao: number
+          status?: string
+          tempo_uso_estimado: number
+          tipo_equipamento_solicitado: string
+          updated_at?: string | null
+        }
+        Update: {
+          cliente_id?: string
+          created_at?: string | null
+          data_entrada_fila?: string | null
+          expires_at?: string | null
+          id?: string
+          notificado_em?: string | null
+          posicao?: number
+          status?: string
+          tempo_uso_estimado?: number
+          tipo_equipamento_solicitado?: string
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fila_espera_cliente_id_fkey"
+            columns: ["cliente_id"]
+            isOneToOne: false
+            referencedRelation: "clientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      segurancas: {
+        Row: {
+          ativo: boolean | null
+          created_at: string | null
+          id: string
+          nome: string
+          posto_trabalho: string
+          updated_at: string | null
+        }
+        Insert: {
+          ativo?: boolean | null
+          created_at?: string | null
+          id?: string
+          nome: string
+          posto_trabalho: string
+          updated_at?: string | null
+        }
+        Update: {
+          ativo?: boolean | null
+          created_at?: string | null
+          id?: string
+          nome?: string
+          posto_trabalho?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
-      [_ in never]: never
+      vw_disponibilidade_equipamentos: {
+        Row: {
+          disponiveis: number | null
+          em_manutencao: number | null
+          em_uso: number | null
+          localizacao: string | null
+          tipo_equipamento: string | null
+          total: number | null
+        }
+        Relationships: []
+      }
+      vw_emprestimos_ativos: {
+        Row: {
+          categoria_cliente: string | null
+          cliente_nome: string | null
+          cliente_telefone: string | null
+          data_devolucao_prevista: string | null
+          data_emprestimo: string | null
+          equipamento_codigo: string | null
+          id: string | null
+          seguranca_nome: string | null
+          status_atual: string | null
+          tempo_uso_estimado: number | null
+          tipo_equipamento: string | null
+        }
+        Relationships: []
+      }
+      vw_fila_espera_ordenada: {
+        Row: {
+          categoria_cliente: string | null
+          cliente_nome: string | null
+          cliente_telefone: string | null
+          data_entrada_fila: string | null
+          id: string | null
+          posicao: number | null
+          status: string | null
+          tempo_uso_estimado: number | null
+          tipo_equipamento_solicitado: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
