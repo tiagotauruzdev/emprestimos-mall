@@ -56,6 +56,7 @@ export type Database = {
           data_emprestimo: string | null
           equipamento_id: string
           id: string
+          local_entrega: string | null
           observacoes: string | null
           seguranca_id: string
           status: string
@@ -71,6 +72,7 @@ export type Database = {
           data_emprestimo?: string | null
           equipamento_id: string
           id?: string
+          local_entrega?: string | null
           observacoes?: string | null
           seguranca_id: string
           status?: string
@@ -86,6 +88,7 @@ export type Database = {
           data_emprestimo?: string | null
           equipamento_id?: string
           id?: string
+          local_entrega?: string | null
           observacoes?: string | null
           seguranca_id?: string
           status?: string
@@ -206,7 +209,6 @@ export type Database = {
           created_at: string | null
           id: string
           nome: string
-          posto_trabalho: string
           updated_at: string | null
         }
         Insert: {
@@ -214,7 +216,6 @@ export type Database = {
           created_at?: string | null
           id?: string
           nome: string
-          posto_trabalho: string
           updated_at?: string | null
         }
         Update: {
@@ -222,7 +223,6 @@ export type Database = {
           created_at?: string | null
           id?: string
           nome?: string
-          posto_trabalho?: string
           updated_at?: string | null
         }
         Relationships: []
@@ -248,7 +248,9 @@ export type Database = {
           data_devolucao_prevista: string | null
           data_emprestimo: string | null
           equipamento_codigo: string | null
+          equipamento_localizacao: string | null
           id: string | null
+          local_entrega: string | null
           seguranca_nome: string | null
           status_atual: string | null
           tempo_uso_estimado: number | null

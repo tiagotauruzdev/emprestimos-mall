@@ -25,7 +25,7 @@ const Equipamentos = () => {
                 Operador: {operator?.nome}
               </p>
               <p className="text-sm text-muted-foreground">
-                {operator?.posto_trabalho === 'espaco_familia' ? 'Espaço Família' : 'Espaço Pet'}
+                Operador do Sistema
               </p>
             </div>
           </div>

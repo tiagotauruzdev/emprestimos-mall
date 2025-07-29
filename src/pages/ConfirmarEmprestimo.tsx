@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ArrowLeft, CheckCircle, Clock, User, Phone, Mail, CreditCard, Package, AlertCircle, RefreshCw } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
@@ -68,6 +69,7 @@ const ConfirmarEmprestimo = () => {
 
   const [loanCreated, setLoanCreated] = useState(false);
   const [loanDetails, setLoanDetails] = useState<any>(null);
+  const [localEntrega, setLocalEntrega] = useState<'espaco_familia' | 'espaco_pet'>('espaco_familia');
   const [error, setError] = useState<string | null>(null);
 
   // Dados passados da página anterior
@@ -100,6 +102,7 @@ const ConfirmarEmprestimo = () => {
         equipmentId: reservedEquipmentId,
         equipmentType,
         operatorId: operator.id,
+        localEntrega,
         estimatedDurationHours: 3 // TODO: Tornar configurável
       });
 
@@ -437,6 +440,29 @@ const ConfirmarEmprestimo = () => {
                   <div className="flex justify-between">
                     <span className="text-muted-foreground">Operador:</span>
                     <span className="font-semibold">{operator?.nome}</span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <span className="text-muted-foreground">Local de Entrega:</span>
+                    <Select value={localEntrega} onValueChange={(value: 'espaco_familia' | 'espaco_pet') => setLocalEntrega(value)}>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="espaco_familia">
+                          <div className="flex items-center">
+                            <span className="mr-2">👨‍👩‍👧‍👦</span>
+                            Espaço Família
+                          </div>
+                        </SelectItem>
+                        <SelectItem value="espaco_pet">
+                          <div className="flex items-center">
+                            <span className="mr-2">🐕</span>
+                            Espaço Pet
+                          </div>
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                   
                   <div className="flex justify-between">

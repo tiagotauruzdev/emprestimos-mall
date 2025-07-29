@@ -20,6 +20,7 @@ interface LoanData {
   equipmentId: string;
   equipmentType: string;
   operatorId: string;
+  localEntrega: 'espaco_familia' | 'espaco_pet';
   estimatedDurationHours?: number;
 }
 
@@ -160,6 +161,7 @@ export function useLoanProcessing() {
           cliente_id: clientResult.clientId,
           equipamento_id: loanData.equipmentId,
           seguranca_id: loanData.operatorId,
+          local_entrega: loanData.localEntrega,
           data_emprestimo: new Date().toISOString(),
           tempo_uso_estimado: loanData.estimatedDurationHours || 3,
           data_devolucao_prevista: returnDeadline.toISOString(),

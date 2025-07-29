@@ -44,26 +44,12 @@ const OperatorSelection = () => {
     setOperator(operator);
   };
 
-  const getPostoLabel = (posto: string) => {
-    switch (posto) {
-      case 'espaco_familia':
-        return 'Espaço Família';
-      case 'espaco_pet':
-        return 'Espaço Pet';
-      default:
-        return posto;
-    }
+  const getOperatorIcon = () => {
+    return '👤'; // Ícone padrão para todos os operadores
   };
 
-  const getPostoIcon = (posto: string) => {
-    switch (posto) {
-      case 'espaco_familia':
-        return '👨‍👩‍👧‍👦';
-      case 'espaco_pet':
-        return '🐕';
-      default:
-        return '👤';
-    }
+  const getOperatorDefaultIcon = () => {
+    return '👮'; // Ícone padrão para todos os operadores
   };
 
   if (loading) {
@@ -117,15 +103,15 @@ const OperatorSelection = () => {
               >
                 <CardHeader className="text-center pb-2">
                   <div className="text-6xl mb-4">
-                    {getPostoIcon(operator.posto_trabalho)}
+                    {getOperatorDefaultIcon()}
                   </div>
                   <CardTitle className="text-xl">{operator.nome}</CardTitle>
                 </CardHeader>
                 
                 <CardContent className="text-center">
                   <Badge variant="secondary" className="mb-4">
-                    <MapPin className="h-3 w-3 mr-1" />
-                    {getPostoLabel(operator.posto_trabalho)}
+                    <User className="h-3 w-3 mr-1" />
+                    Operador
                   </Badge>
                   
                   <Button 

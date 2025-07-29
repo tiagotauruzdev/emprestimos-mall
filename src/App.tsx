@@ -33,9 +33,12 @@ const AppContent = () => {
     "/confirmar-devolucao"
   ];
   
-  const isTotemRoute = totemRoutes.some(route => 
-    location.pathname === route || location.pathname.startsWith(route)
-  );
+  const isTotemRoute = totemRoutes.some(route => {
+    if (route === "/") {
+      return location.pathname === "/";
+    }
+    return location.pathname === route || location.pathname.startsWith(route + "/");
+  });
 
   // Se não há operador selecionado e estamos em uma rota do totem, mostrar seleção
   if (!operator && isTotemRoute) {
